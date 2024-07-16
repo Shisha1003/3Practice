@@ -10,7 +10,6 @@ public class ShootAbility : MonoBehaviour, IAbility
     public float shootDelay;
     public float bulletLifetime = 3f;
     private float _shootTime = float.MinValue;
-    BulletManager _bulletManager;
 
     public void Execute()
     {
@@ -27,6 +26,10 @@ public class ShootAbility : MonoBehaviour, IAbility
         {
             var t = transform;
             var newBullet = Instantiate(bullet, t.position, t.rotation);
+            if (ReactionOnCollision.isBulletBounce)
+            {
+            newBullet.AddComponent<BulletBounce>();
+            }
 
             var bulletComponent = newBullet.GetComponent<BulletManager>();
     

@@ -17,6 +17,8 @@ public class ReactionOnCollision : MonoBehaviour
 
     private BulletManager _bulletManager;
 
+    public static bool isBulletBounce;
+
     public List<IAbilityTarget> TypeOfObject(Collider _collider)
     {
         if (gameObject == null)
@@ -43,23 +45,7 @@ public class ReactionOnCollision : MonoBehaviour
                 currentScript = gameObject.GetComponent<ApplyDamage>();
                 break;
             case CapsuleCollider capsule:
-                
-                _bulletManager.AddPrefabToScene();
-                var _bulletPrefab = gameObject.GetComponent<BulletManager>();
-                _bulletManager.EnableBulletBounce();
-                _bulletManager.DeletePrefabFromScene(_bulletManager.bulletPrefab);
-               // _shootAbility.Execute();
-               //BulletManager _bulletManager = FindAnyObjectByType<BulletManager>();
-               //var _bulletManager = gameObject.GetComponent<BulletManager>();
-               //BulletManager bulletManager = BulletManager.Instance;
-               //BulletManager.Instance.EnableBulletBounce();
-               //_bulletManager.shouldAddBounceComponent = true;
-
-
-                //if (bullet.GetComponent<BulletBounce>() == null)
-                //{
-                //    bullet.gameObject.AddComponent<BulletManager>();
-                //}
+                isBulletBounce = true;
                 gameObject.SetActive(false);
                 break;
 
