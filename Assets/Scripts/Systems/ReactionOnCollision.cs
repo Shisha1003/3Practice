@@ -17,8 +17,12 @@ public class ReactionOnCollision : MonoBehaviour
 
     private BulletManager _bulletManager;
 
-    public static bool isBulletBounce;
+    ShootAbility shootAbil;
 
+    private void Start()
+    {
+        shootAbil = FindObjectOfType<ShootAbility>();
+    }
     public List<IAbilityTarget> TypeOfObject(Collider _collider)
     {
         if (gameObject == null)
@@ -45,7 +49,8 @@ public class ReactionOnCollision : MonoBehaviour
                 currentScript = gameObject.GetComponent<ApplyDamage>();
                 break;
             case CapsuleCollider capsule:
-                isBulletBounce = true;
+
+                shootAbil.isBulletBounce = true;
                 gameObject.SetActive(false);
                 break;
 
