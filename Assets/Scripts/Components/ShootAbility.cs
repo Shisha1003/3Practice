@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using DefaultNamespace;
+using System;
 
 public class ShootAbility : MonoBehaviour, IAbility
 {
@@ -11,7 +14,23 @@ public class ShootAbility : MonoBehaviour, IAbility
     public float bulletLifetime = 3f;
     private float _shootTime = float.MinValue;
 
+    public PlayerStats playerStats;
+    public PlayerScale playerScale;
+
     public bool isBulletBounce;
+
+    private void Start()
+    {
+        var jsonString = PlayerPrefs.GetString("Stats");
+        if (!jsonString.Equals(String.Empty, StringComparison.Ordinal))
+        {
+            playerStats = JsonUtility.FromJson<PlayerStats>(jsonString);
+        }
+        else
+        {
+            playerStats = new PlayerStats();
+        }
+    }
     public void Execute()
     {
         if (Time.time < _shootTime + shootDelay)
@@ -27,6 +46,9 @@ public class ShootAbility : MonoBehaviour, IAbility
         {
             var t = transform;
             var newBullet = Instantiate(bullet, t.position, t.rotation);
+
+            playerStats.shootsCount++;
+
             if (isBulletBounce)
             {
             newBullet.AddComponent<BulletBounce>();

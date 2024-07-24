@@ -12,7 +12,7 @@ public class ApplyDamage : MonoBehaviour, IAbilityTarget
         foreach (var target in Targets) 
         {
             var health = target.GetComponent<CharacterHealth>();
-            if (health != null) health.Health -= Damage;
+            if (health != null) health.TakeDamage(Damage);
             gameObject.SetActive(false);
         }
     }

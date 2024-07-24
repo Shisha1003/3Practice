@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogMoveComponent : MonoBehaviour
+public interface IBehaviour 
 {
-    public float moveSpeed = 1f;
+    float Evaluate();
+    void Behave();
 }
