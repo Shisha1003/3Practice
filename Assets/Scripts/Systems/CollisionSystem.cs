@@ -61,14 +61,33 @@ namespace DefaultNamespace.Systems
                             throw new ArgumentOutOfRangeException();
                     }
 
+                    //if (size > 0)
+                    //{
+                    //    foreach (var results in _results)
+                    //    {
+                    //        if (results != null)
+                    //        {
+                    //           abilityCollision?.collisions?.Add(results);
+                    //        }
+
+                    //    }
+
+                    //    abilityCollision.Execute();
+                    //    abilityCollision.collisions?.Clear();
+                    //}
                     if (size > 0)
                     {
-                        foreach (var results in _results)
+                        abilityCollision.collisions?.Clear();
+                        for (int i = 0; i < size; i++)
                         {
-                            abilityCollision?.collisions?.Add(results);
+                            var result = _results[i];
+                            if (result != null)
+                            {
+                                abilityCollision?.collisions?.Add(result);
+                            }
                         }
-                       
                         abilityCollision.Execute();
+                        abilityCollision.collisions?.Clear();
                     }
                 });
         }

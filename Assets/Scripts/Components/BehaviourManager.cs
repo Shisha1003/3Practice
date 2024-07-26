@@ -13,11 +13,6 @@ public class BehaviourManager : MonoBehaviour, IConvertGameObjectToEntity
         dstManager.AddComponent<AIAgent>(entity);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public struct AIAgent : IComponentData
     {

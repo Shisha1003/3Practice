@@ -17,6 +17,7 @@ public class ReactionOnCollision : MonoBehaviour
 
     private BulletManager _bulletManager;
 
+
     ShootAbility shootAbil;
 
     private void Start()
@@ -30,6 +31,8 @@ public class ReactionOnCollision : MonoBehaviour
             Debug.LogError("gameObject is null");
             return null;
         }
+        collisionActions.Clear();
+        collisionActionsAbilities.Clear();
 
         switch (_collider)
         {
@@ -55,13 +58,17 @@ public class ReactionOnCollision : MonoBehaviour
                 break;
 
         }
-         collisionActions?.Add(currentScript);
+        if (currentScript != null)
+        {
+            collisionActions?.Add(currentScript);
+        }
+         
 
         foreach (var action in collisionActions)
         {
             if (action is IAbilityTarget ability)
             {
-                collisionActionsAbilities.Add(ability);
+                collisionActionsAbilities?.Add(ability);
             }
         }
 
